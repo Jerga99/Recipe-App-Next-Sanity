@@ -22,35 +22,6 @@ const recipesQuery =`*[_type == "recipe" && slug.current == $slug]{
                         likes
                     }`
 
-export async function getStaticPaths(){
-
-    const paths = await sanityClient.fetch(`
-        *[_type == "recipe" && defined(slug.current)]{
-            "params":{
-                "slug":slug.current
-            }
-        }
-    `)
-    return{
-        paths, 
-        fallback:true
-    }
-    //true ---> shows loading in line no 58
-    //false ---> shows 404
-}
-
-export async function getStaticProps({params}){
-
-    const {slug}= params;
-    const recipe = await sanityClient.fetch(recipesQuery, {slug})
-
-    //console.log(recipe)
-    return{
-        props: {
-            recipe:recipe[0],
-        }
-    }
-}
 
 export default function OneRecipes({recipe}) {
 
@@ -60,7 +31,7 @@ export default function OneRecipes({recipe}) {
         <h2 style={{position:"absolute", width:"100%", height:"100vh", display:"flex", alignItems:"center",justifyContent:"center"}}>Loading content</h2>
     }
     
-    //console.log(recipe)
+    
     const [like, setLike] = useState(recipe?.likes);
 
     const addLike = async ()=>{
@@ -74,6 +45,8 @@ export default function OneRecipes({recipe}) {
         setLike(data.likes)
     }
 
+    console.log(recipe)
+    
     return (
         <>  
             <Head>
@@ -92,7 +65,6 @@ export default function OneRecipes({recipe}) {
                     {recipe.ingredient?.map( i => 
                        
                         <li key={i._key}>
-                        {/* {console.log(i)} */}
                             {i.wholeNumber}
                             {", "}
                             {i.fraction}
@@ -198,4 +170,35 @@ export default function OneRecipes({recipe}) {
            
         </>
     )
+}
+
+
+export async function getStaticPaths(){
+
+    const paths = await sanityClient.fetch(`
+        *[_type == "recipe" && defined(slug.current)]{
+            "params":{
+                "slug":slug.current
+            }
+        }
+    `)
+    return{
+        paths, 
+        fallback:true
+    }
+    //true ---> shows loading in line no 58
+    //false ---> shows 404
+}
+
+export async function getStaticProps({params}){
+
+    const {slug}= params;
+    const recipe = await sanityClient.fetch(recipesQuery, {slug})
+
+    //console.log(recipe)
+    return{
+        props: {
+            recipe:recipe[0],
+        }
+    }
 }
