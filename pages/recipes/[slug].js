@@ -47,12 +47,11 @@ export async function getStaticProps({params}){
     return{
         props: {
             recipe:recipe[0],
-            preview:true
         }
     }
 }
 
-export default function oneRecipes({recipe, preview}) {
+export default function OneRecipes({recipe}) {
 
     const router = useRouter()
 
@@ -85,10 +84,7 @@ export default function oneRecipes({recipe, preview}) {
                 <h2>This is</h2>
                 <h1>{recipe.name}</h1>
 
-                <img src={urlFor(recipe?.mainImage).url()} />
-
-                {/* alt={recipe.mainImage.asset.altText}
-                {console.log(recipe.mainImage.asset)} */}
+                <div className="img"></div>
                 <div>
                     <ul>
                     
@@ -147,11 +143,14 @@ export default function oneRecipes({recipe, preview}) {
                         background: #f3f3f3;
                
                     }
-                    img{
+                    .img{
                         width: 100%;
                         height: 500px;
-                        object-fit:cover;                   
+                        object-fit:cover;        
+                        background:url(${urlFor(recipe?.mainImage).url()}) no-repeat 50% 50%;
+                        background-size:cover ;
                         margin: 2rem 0;
+                        overflow:hidden;
                     }
                     .container {
                         padding: 5rem;

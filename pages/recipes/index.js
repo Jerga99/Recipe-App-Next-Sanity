@@ -4,8 +4,8 @@ import Image from "next/image"
 import Link from 'next/link'
 import styles from 'styles/Home.module.css'
 
-import { Swiper, SwiperSlide } from 'swiper/react';
-import SwiperCore, { EffectFade, Scrollbar } from 'swiper/core';
+// import { Swiper, SwiperSlide } from 'swiper/react';
+// import SwiperCore, { EffectFade, Scrollbar } from 'swiper/core';
 
 SwiperCore.use([EffectFade, Scrollbar]);
 
@@ -54,7 +54,7 @@ export default function Home({recipes}) {
               <Image src={urlFor(recipe.mainImage).url()}
                width={300} height={200} 
                objectFit={'cover'} 
-               loading="lazy" />
+               loading="lazy" alt={recipe.name} />
 
               <span>{recipe.name}</span>
 

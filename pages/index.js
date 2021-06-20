@@ -47,7 +47,7 @@ export default function Home({recipes}) {
               <Image src={urlFor(recipe.mainImage).url()}
                width={300} height={200} 
                objectFit={'cover'} 
-               loading="lazy" />
+               loading="lazy" alt={recipe.name} />
 
               <span>{recipe.name}</span>
 
