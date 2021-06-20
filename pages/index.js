@@ -35,6 +35,7 @@ export default function Home({recipes}) {
           The Recipe Blog
         </h1>
 
+        <p>Hi there, This is a demo recipe app build with Nextjs and Sanity Cms.</p>
         {recipes?.length == 0 &&  <h2>Nothing is here!</h2>}
 
         <ul>
@@ -60,6 +61,10 @@ export default function Home({recipes}) {
         <Link href="/recipes"><a className="btn">View All</a></Link>
 
         <style jsx>{`
+          p{
+            margin-bottom:1rem;
+            font-size:1.3rem;
+          }
           a {
               color: inherit;
               text-decoration: none;

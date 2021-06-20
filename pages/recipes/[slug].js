@@ -1,6 +1,7 @@
 import {useState} from "react"
 import {useRouter} from "next/router"
 import Head from "next/head"
+import Link from "next/link"
 import { sanityClient, urlFor, Portabletext } from 'lib/sanity'
 
 const recipesQuery =`*[_type == "recipe" && slug.current == $slug]{
@@ -32,7 +33,7 @@ export async function getStaticPaths(){
     `)
     return{
         paths, 
-        fallback:false
+        fallback:true
     }
     //true ---> shows loading in line no 58
     //false ---> shows 404
@@ -56,7 +57,7 @@ export default function OneRecipes({recipe}) {
     const router = useRouter()
 
     if(router.isFallback){
-        <h2 style={{position:"absolute", width:"100%", height:"100vh", display:"flex", alignItems:"center",justifyContent:"center"}}>Loading</h2>
+        <h2 style={{position:"absolute", width:"100%", height:"100vh", display:"flex", alignItems:"center",justifyContent:"center"}}>Loading content</h2>
     }
     
     //console.log(recipe)
@@ -114,8 +115,22 @@ export default function OneRecipes({recipe}) {
                 <button onClick={addLike}>
                     {like} ❤
                 </button>
+                
+                <Link href="/"><a className="home">Back</a></Link>
 
                 <style jsx>{`
+
+                    .home{
+                        font-size: 1rem;
+                        color: #4d4d4d;
+                        display: block;
+                        width: 87px;
+                        text-align: center;
+                        margin-top: 1rem;
+                        padding: 0.5rem 1rem;
+                        background: white;
+                        border: 1px solid #b2b2b2;
+                    }
                     h4{
                         margin-top: 1rem;   
                     }

@@ -4,11 +4,6 @@ import Image from "next/image"
 import Link from 'next/link'
 import styles from 'styles/Home.module.css'
 
-// import { Swiper, SwiperSlide } from 'swiper/react';
-// import SwiperCore, { EffectFade, Scrollbar } from 'swiper/core';
-
-SwiperCore.use([EffectFade, Scrollbar]);
-
 const recipesQuery = `*[_type == "recipe"]|order(_createdAt desc){
                          _id, name, slug, mainImage
                       }`
@@ -64,38 +59,6 @@ export default function Home({recipes}) {
         )}
         </ul>
 
-
-        {/* <div className="slider">
-            <Swiper spaceBetween={20}
-                    slidesPerView={4}
-                    className="mySwiper"
-                    scrollbar={{"hide": true}} >
-
-            {recipes?.length >0 && recipes.map( recipe => 
-
-                <SwiperSlide key={recipe._id}>
-                  <div className="li" >
-                  
-                    <Link href={`/recipes/${recipe.slug.current}`}><a>
-
-                      <Image src={urlFor(recipe.mainImage).url()}
-                      width={300} height={200} 
-                      objectFit={'cover'} 
-                      loading="lazy" />
-
-                      <span>{recipe.name}</span>
-
-                    </a></Link>
-                  </div>
-
-                </SwiperSlide>
-            )}             
-                
-
-            </Swiper>
-        </div> */}
-
-
         <style jsx>{`
 
           .slider{
@@ -122,12 +85,6 @@ export default function Home({recipes}) {
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             grid-gap: 1rem;
             width: 100%;
-          }
-          .li{
-            padding: 1rem;
-            border: 1px solid #c9c9c9;
-            background: #e5e5e5;
-            margin-bottom: 2rem;
           }
           li{
             list-style: none;
