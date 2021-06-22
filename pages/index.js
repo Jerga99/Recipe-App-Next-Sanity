@@ -58,8 +58,9 @@ export default function Home({recipes}) {
         )}
         </ul>
 
-        <Link href="/recipes"><a className="btn">View All</a></Link>
-
+        {recipes?.length >0 &&
+          <Link href="/recipes"><a className="btn">View All</a></Link>
+        }
         <style jsx>{`
           p{
             margin-bottom:1rem;
